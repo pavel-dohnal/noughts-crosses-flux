@@ -1,13 +1,11 @@
-/** @jsx React.DOM */
+
+
 var React = require('react');
-var requireStylesheet = require('stylesheets').requireStylesheet;
+var Game = require('./components/Game.react');
+window.React = React; // export for http://fb.me/react-devtools
 
-requireStylesheet(process.env.STATIC_ROOT + 'app.css');
 
-var MyComponent = React.createClass({
-  render: function() {
-    return <span className="MyComponent">Hello, MyComponent!</span>;
-  }
-});
-
-module.exports = MyComponent;
+React.render(
+  <Game />,
+  document.getElementById('react')
+);

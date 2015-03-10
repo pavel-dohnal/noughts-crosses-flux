@@ -22,6 +22,3 @@
 .game-board tr:last-child {
 	border-bottom: none;
 }
-span {
-	color:red;
-}
