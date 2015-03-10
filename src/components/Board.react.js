@@ -8,11 +8,20 @@ var Board = React.createClass({
     return BoardStore.getAll();
   },
 
+  componentDidMount: function() {
+    BoardStore.addChangeListener(this._onChange);
+  },
+
+  componentWillUnmount: function() {
+    BoardStore.removeChangeListener(this._onChange);
+  },
+
   render: function() {
-    var rows = this.state.rows.map(function (row) {
+    var rows = this.state.rows.map(function (row, index) {
       return (
         <Row
           rowData={row}
+          rowId={index}
         />
       );
     });
@@ -26,6 +35,9 @@ var Board = React.createClass({
         </p>
       </div>
     );
+  },
+  _onChange: function() {
+    this.setState(BoardStore.getAll());
   }
 
 });

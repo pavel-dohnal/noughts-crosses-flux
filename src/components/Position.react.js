@@ -1,4 +1,5 @@
 var React = require('react');
+var action = require('../actions/GameActionCreators.js');
 
 var Row = React.createClass({  
 
@@ -17,12 +18,18 @@ var Row = React.createClass({
         />;
     }    
     return (
-      <td>
+      <td 
+        onClick={this._onClick}
+      >
         {img}
       </td>
     );
-  }
+  },
 
+  _onClick: function() {
+    action.click(this.props.rowId, this.props.positionId);
+  }
 });
+
 
 module.exports = Row;

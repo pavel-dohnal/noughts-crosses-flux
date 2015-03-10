@@ -4,10 +4,13 @@ var Position = require('./Position.react');
 var Row = React.createClass({  
 
   render: function() {
-    positions = this.props.rowData.positions.map(function (position){
+    var rowId = this.props.rowId;
+    positions = this.props.rowData.positions.map(function (position, index){
       return (
         <Position
           value={position}
+          rowId={rowId}
+          positionId={index}
         />
       );
     })
