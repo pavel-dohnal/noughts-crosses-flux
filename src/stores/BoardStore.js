@@ -19,6 +19,36 @@ var board = {
         }
       ]
     };
+var player = 0;
+var winner = false;
+
+function checkWinner() {
+  if ((board.rows[0].positions[0] == player) && (board.rows[0].positions[1] == player) && (board.rows[0].positions[2] == player)) {
+    return true;//first row
+  }
+  if ((board.rows[1].positions[0] == player) && (board.rows[1].positions[1] == player) && (board.rows[1].positions[2] == player)) {
+    return true;//second row
+  }
+  if ((board.rows[2].positions[0] == player) && (board.rows[2].positions[1] == player) && (board.rows[2].positions[2] == player)) {
+    return true;//third row
+  }
+  if ((board.rows[0].positions[0] == player) && (board.rows[1].positions[0] == player) && (board.rows[2].positions[0] == player)) {
+    return true;//first column
+  }
+  if ((board.rows[0].positions[1] == player) && (board.rows[1].positions[1] == player) && (board.rows[2].positions[1] == player)) {
+    return true;//second column
+  }
+  if ((board.rows[0].positions[2] == player) && (board.rows[1].positions[2] == player) && (board.rows[2].positions[2] == player)) {
+    return true;//third column
+  }
+  if ((board.rows[0].positions[0] == player) && (board.rows[1].positions[1] == player) && (board.rows[2].positions[2] == player)) {
+    return true;//first diagonal
+  }
+  if ((board.rows[0].positions[2] == player) && (board.rows[1].positions[1] == player) && (board.rows[2].positions[0] == player)) {
+    return true;//second diagonal
+  }
+  return false
+}
 
 var BoardStore = assign({}, EventEmitter.prototype, {
 
@@ -39,7 +69,14 @@ var BoardStore = assign({}, EventEmitter.prototype, {
   },
 
   click: function (x, y) {
-    board.rows[x].positions[y] = 1;
+    if (winner) {
+      return;
+    }
+    board.rows[x].positions[y] = player;
+    winner = checkWinner();
+    if (!winner) {
+      player = (player + 1) %2;
+    }
   }
 });
 

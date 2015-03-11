@@ -1,6 +1,7 @@
 var React = require('react');
 var BoardStore = require('../stores/BoardStore');
 var Row = require('./Row.react');
+var GameStatus = require('./GameStatus.react');
 
 var Board = React.createClass({
 
@@ -30,9 +31,7 @@ var Board = React.createClass({
         <table className="game-board">
           {rows}
         </table>
-        <p>
-          Play play play
-        </p>
+        <GameStatus />
       </div>
     );
   },
