@@ -17,34 +17,34 @@ var board = {
         {
           positions: [null, null, null],
         }
-      ]
+      ],
+      player: 0,
+      winner: false
     };
-var player = 0;
-var winner = false;
 
 function checkWinner() {
-  if ((board.rows[0].positions[0] == player) && (board.rows[0].positions[1] == player) && (board.rows[0].positions[2] == player)) {
+  if ((board.rows[0].positions[0] == board.player) && (board.rows[0].positions[1] == board.player) && (board.rows[0].positions[2] == board.player)) {
     return true;//first row
   }
-  if ((board.rows[1].positions[0] == player) && (board.rows[1].positions[1] == player) && (board.rows[1].positions[2] == player)) {
+  if ((board.rows[1].positions[0] == board.player) && (board.rows[1].positions[1] == board.player) && (board.rows[1].positions[2] == board.player)) {
     return true;//second row
   }
-  if ((board.rows[2].positions[0] == player) && (board.rows[2].positions[1] == player) && (board.rows[2].positions[2] == player)) {
+  if ((board.rows[2].positions[0] == board.player) && (board.rows[2].positions[1] == board.player) && (board.rows[2].positions[2] == board.player)) {
     return true;//third row
   }
-  if ((board.rows[0].positions[0] == player) && (board.rows[1].positions[0] == player) && (board.rows[2].positions[0] == player)) {
+  if ((board.rows[0].positions[0] == board.player) && (board.rows[1].positions[0] == board.player) && (board.rows[2].positions[0] == board.player)) {
     return true;//first column
   }
-  if ((board.rows[0].positions[1] == player) && (board.rows[1].positions[1] == player) && (board.rows[2].positions[1] == player)) {
+  if ((board.rows[0].positions[1] == board.player) && (board.rows[1].positions[1] == board.player) && (board.rows[2].positions[1] == board.player)) {
     return true;//second column
   }
-  if ((board.rows[0].positions[2] == player) && (board.rows[1].positions[2] == player) && (board.rows[2].positions[2] == player)) {
+  if ((board.rows[0].positions[2] == board.player) && (board.rows[1].positions[2] == board.player) && (board.rows[2].positions[2] == board.player)) {
     return true;//third column
   }
-  if ((board.rows[0].positions[0] == player) && (board.rows[1].positions[1] == player) && (board.rows[2].positions[2] == player)) {
+  if ((board.rows[0].positions[0] == board.player) && (board.rows[1].positions[1] == board.player) && (board.rows[2].positions[2] == board.player)) {
     return true;//first diagonal
   }
-  if ((board.rows[0].positions[2] == player) && (board.rows[1].positions[1] == player) && (board.rows[2].positions[0] == player)) {
+  if ((board.rows[0].positions[2] == board.player) && (board.rows[1].positions[1] == board.player) && (board.rows[2].positions[0] == board.player)) {
     return true;//second diagonal
   }
   return false
@@ -69,13 +69,13 @@ var BoardStore = assign({}, EventEmitter.prototype, {
   },
 
   click: function (x, y) {
-    if (winner) {
+    if (board.winner) {
       return;
     }
-    board.rows[x].positions[y] = player;
-    winner = checkWinner();
-    if (!winner) {
-      player = (player + 1) %2;
+    board.rows[x].positions[y] = board.player;
+    board.winner = checkWinner();
+    if (!board.winner) {
+      board.player = (board.player + 1) % 2;
     }
   }
 });

@@ -31,7 +31,10 @@ var Board = React.createClass({
         <table className="game-board">
           {rows}
         </table>
-        <GameStatus />
+        <GameStatus 
+          winner={this.state.winner}
+          player={this.state.player}
+        />
       </div>
     );
   },

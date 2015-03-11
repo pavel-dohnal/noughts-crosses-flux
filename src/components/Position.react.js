@@ -16,7 +16,7 @@ var Row = React.createClass({
           width="50" 
           height="50" 
         />;
-    }    
+    }
     return (
       <td 
         onClick={this._onClick}
